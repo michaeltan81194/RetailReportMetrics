@@ -1,0 +1,8 @@
+Find the Customer who bought in Oct, 2022 but did not have any purchase in Nov and Dec, 2022:
+	WITH FilterCustomer AS 
+	(SELECT *, CAST("Mã KH" as int) as CastType FROM dataCustomer2 dc 
+	WHERE dc."Mã KH" NOT IN (SELECT dc2."Mã KH"  from dataCustomer2 dc2
+	WHERE (dc2."Year" = 2022 or dc2."Year"= 2023) AND (dc2."Month" ='November' or dc2."Month" = 'December' or dc2."Month" = 'January' )))
+	select count(DISTINCT("Mã KH")) from FilterCustomer
+	WHERE CastType = 0
+	 
